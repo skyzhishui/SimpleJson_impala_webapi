@@ -32,9 +32,7 @@ namespace SimpleJson_impala_webapi.Controllers
             Response.Headers.Add("Access-Control-Allow-Headers", "accept, content-type");
             Response.Headers.Add("Access-Control-Allow-Methods", "POST");
             Response.Headers.Add("Access-Control-Allow-Origin", "*");
-
-            List<string> rest =  App.sqllist.Keys.ToList<string>();
-            return rest;
+            return  App.sqllist.Keys.ToList<string>();
         }
     }
     [ApiController]
