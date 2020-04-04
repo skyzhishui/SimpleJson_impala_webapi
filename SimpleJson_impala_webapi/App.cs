@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -33,7 +34,28 @@ namespace SimpleJson_impala_webapi
                 task.Start();
             }
         }
+        public static List<object> GetQueryResult(object req) 
+        {
+            List<object> result = new List<object>();
+            try
+            {
+                var json = JsonConvert.DeserializeObject<JObject>(req.ToString());
+                var targets = json["targets"].Value<JArray>();
+                if (targets == null)
+                    return result;
+                for (int i = 0; i < targets.Count; i++)
+                {
+                    string target = targets[i]["target"].ToString();
+                    string type = targets[i]["type"].ToString();
+                    result.Add(App.GetResult(target, type));
+                }
+            }
+            catch
+            {
 
+            }
+            return result;
+        }
         private static void UpdateData()
         {
             List<string> keylist = datalist.Keys.ToList();
