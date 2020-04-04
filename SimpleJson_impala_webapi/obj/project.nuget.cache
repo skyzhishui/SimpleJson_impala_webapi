@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "YYxzZYdi9nLgaLMhsJqtLZ3+OBEu1CoOFWJE4eRlhdAUzPeCRVb4jQE+iekRDxeScstLzQGPnv3hSsKk37/jpw==",
+  "success": true,
+  "projectFilePath": "D:\\Visual Studio 2017\\Projects\\new\\wsjy_logs_webApi\\wsjy_logs_webApi\\wsjy_logs_webApi.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\system.data.odbc\\4.7.0\\system.data.odbc.4.7.0.nupkg.sha512"
+  ],
+  "logs": []
+}

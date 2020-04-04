@@ -1,0 +1,4 @@
+{
+  "gstjylogs": "select avg(cast(response_time as bigint)) as gkfmc80,unix_timestamp(concat(req_date,req_time), 'yyyyMMddHH:mm:ss.SSS')*1000 as ctime from gstjylogs where did= '23' and ans_time > '08:15:00.000' and site = 'gkfmc80' and cast(response_time as bigint) between 0 and 500 group by ctime order by ctime",
+  "gstjylogs2": "select avg(cast(response_time as bigint)) as gkfmc80,unix_timestamp(concat(req_date,req_time), 'yyyyMMddHH:mm:ss.SSS')*1000 as ctime from gstjylogs where did= '23' and ans_time > '08:15:00.000' and site = 'gkfmc80' and cast(response_time as bigint) between 0 and 500 group by ctime order by ctime"
+}

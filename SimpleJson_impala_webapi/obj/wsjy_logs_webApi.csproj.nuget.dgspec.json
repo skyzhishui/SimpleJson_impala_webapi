@@ -1,0 +1,77 @@
+{
+  "format": 1,
+  "restore": {
+    "F:\\code\\wsjy_logs_webApi\\wsjy_logs_webApi\\wsjy_logs_webApi.csproj": {}
+  },
+  "projects": {
+    "F:\\code\\wsjy_logs_webApi\\wsjy_logs_webApi\\wsjy_logs_webApi.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "F:\\code\\wsjy_logs_webApi\\wsjy_logs_webApi\\wsjy_logs_webApi.csproj",
+        "projectName": "SimpleJson_impala_webapi",
+        "projectPath": "F:\\code\\wsjy_logs_webApi\\wsjy_logs_webApi\\wsjy_logs_webApi.csproj",
+        "packagesPath": "C:\\Users\\skyzhishui\\.nuget\\packages\\",
+        "outputPath": "F:\\code\\wsjy_logs_webApi\\wsjy_logs_webApi\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "c:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\skyzhishui\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.0"
+        ],
+        "sources": {
+          "c:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.0": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.0": {
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
+            },
+            "System.Data.Odbc": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "c:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
