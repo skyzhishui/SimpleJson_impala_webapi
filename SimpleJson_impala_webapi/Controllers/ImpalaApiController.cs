@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -32,7 +32,9 @@ namespace SimpleJson_impala_webapi.Controllers
             Response.Headers.Add("Access-Control-Allow-Headers", "accept, content-type");
             Response.Headers.Add("Access-Control-Allow-Methods", "POST");
             Response.Headers.Add("Access-Control-Allow-Origin", "*");
-            return App.sqllist.Keys.ToList<string>();
+
+            List<string> rest =  App.sqllist.Keys.ToList<string>();
+            return rest;
         }
     }
     [ApiController]
@@ -40,30 +42,13 @@ namespace SimpleJson_impala_webapi.Controllers
     public class queryController : ControllerBase
     {
         [HttpPost]
-        public List<object> Post(object req)
+        public async Task<List<object>> Post(object req)
         {
             Response.Headers.Add("Access-Control-Allow-Headers", "accept, content-type");
             Response.Headers.Add("Access-Control-Allow-Methods", "POST");
             Response.Headers.Add("Access-Control-Allow-Origin", "*");
-            List<object> result = new List<object>();
-            try
-            {
-                var json = JsonConvert.DeserializeObject<JObject>(req.ToString());
-                var targets = json["targets"].Value<JArray>();
-                if (targets == null)
-                    return result;
-                for (int i = 0; i < targets.Count; i++)
-                {
-                    string target = targets[i]["target"].ToString();
-                    string type = targets[i]["type"].ToString();
-                    result.Add(App.GetResult(target, type));
-                }
-            }
-            catch 
-            {
-                
-            }
-            return result;
+            var task = await Task.Run(() => App.GetQueryResult(req));
+            return task;
         }
     }
     
