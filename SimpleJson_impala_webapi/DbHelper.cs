@@ -24,12 +24,6 @@ namespace SimpleJson_impala_webapi
                 connection.Open();
             }
         }
-        public static string DataTableToJson(DataTable dt)
-        {
-            string JsonString = string.Empty;
-            JsonString = JsonConvert.SerializeObject(dt);
-            return JsonString;
-        }
         public static DataTable ExecuteDataTable(string SQLString)
         {
             
