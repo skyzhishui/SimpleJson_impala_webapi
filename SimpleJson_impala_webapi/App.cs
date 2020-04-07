@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -95,6 +95,7 @@ namespace SimpleJson_impala_webapi
                 TableResultModel tableResult = new TableResultModel();
                 tableResult.columns = columns;
                 tableResult.rows = rows;
+                tableResult.type = "table";
                 return tableResult;
             }
         }
@@ -139,9 +140,9 @@ namespace SimpleJson_impala_webapi
     {
         public List<ColumnModel> columns { get; set; }
         public List<List<object>> rows { get; set; }
-        public string type = "table";
+        public string type { get; set; }
 
-    }
+}
     public class ColumnModel
     {
         public ColumnModel(string text,string type)
