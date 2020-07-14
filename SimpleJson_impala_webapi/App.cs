@@ -11,29 +11,22 @@ namespace SimpleJson_impala_webapi
     public class App
     {
 
-        private static System.Timers.Timer timer;
-        private static Task task;
-
+        private static long tbInterval = 60000;
+        private static long tsInterval = 180000;
         public static Dictionary<string, string> sqllist = new Dictionary<string, string>();
+        public static Dictionary<string, DateTime> datatick = new Dictionary<string, DateTime>();
         public static Dictionary<string, object> datalist = new Dictionary<string, object>();
+        public static Dictionary<string, Task> tasklist = new Dictionary<string, Task>();
         public static void Run()
         {
             DbHelper.InitConnect();
-            timer = new System.Timers.Timer();
-            timer.Elapsed += Timer_Elapsed;
-            timer.Interval = 180000;
-            timer.Start();
-            task = new Task(() => UpdateData());
-        }
-
-        private static void Timer_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            if (task.Status != TaskStatus.Running)
+            List<string> keylist = sqllist.Keys.ToList();
+            for (int i = 0; i < keylist.Count; i++)
             {
-                task = new Task(() => UpdateData());
-                task.Start();
+                Console.WriteLine("load sqlname:" + sqllist[keylist[i]]);
             }
         }
+
         public static List<object> GetQueryResult(object req) 
         {
             List<object> result = new List<object>();
@@ -55,6 +48,11 @@ namespace SimpleJson_impala_webapi
 
             }
             return result;
+        }
+        private static void UpdateData(string target, string type)
+        {   
+            datalist[target + "^" + type] = GetData(target, type);
+            datatick[target + "^" + type] = DateTime.Now;
         }
         private static void UpdateData()
         {
@@ -103,12 +101,38 @@ namespace SimpleJson_impala_webapi
         {
             if (datalist.ContainsKey(target + "^" + type))
             {
+                long ts = (long)(DateTime.Now - datatick[target + "^" + type]).TotalMilliseconds;
+                if (type == "timeserie")
+                {
+                    if (ts > tsInterval) 
+                    {
+                        if (tasklist[target + "^" + type].Status != TaskStatus.Running)
+                        {
+                            tasklist[target + "^" + type] = new Task(() => UpdateData(target, type));
+                            tasklist[target + "^" + type].Start();
+                        }
+                        
+                    }
+                }
+                else 
+                {
+                    if (ts > tbInterval)
+                    {
+                        if (tasklist[target + "^" + type].Status != TaskStatus.Running)
+                        {
+                            tasklist[target + "^" + type] = new Task(() => UpdateData(target, type));
+                            tasklist[target + "^" + type].Start();
+                        }
+                    }
+                }
                 return datalist[target + "^" + type];
             }
             else 
             {
                 object data = GetData(target, type);
                 datalist.Add(target + "^" + type, data);
+                datatick.Add(target + "^" + type, DateTime.Now);
+                tasklist.Add(target + "^" + type, new Task(() => UpdateData(target, type)));
                 return data;
             }
         }
@@ -140,9 +164,9 @@ namespace SimpleJson_impala_webapi
     {
         public List<ColumnModel> columns { get; set; }
         public List<List<object>> rows { get; set; }
-        public string type { get; set; }
+        public string type  { get; set; }
 
-}
+    }
     public class ColumnModel
     {
         public ColumnModel(string text,string type)
